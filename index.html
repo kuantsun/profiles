@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glassmorphism Profile Card</title>
+    <style>
+        /* Reset CSS cơ bản */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        /* Nền Gradient động để làm nổi bật hiệu ứng trong suốt */
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+            background-size: 300% 300%;
+            animation: gradientMove 15s ease infinite;
+            padding: 20px;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Thẻ Profile mang hiệu ứng Kính mờ (Glassmorphism) */
+        .profile-card {
+            width: 100%;
+            max-width: 380px;
+            background: rgba(255, 255, 255, 0.1);
+            
+            /* Tối ưu hiệu ứng mờ cho iOS và các trình duyệt khác */
+            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(15px);
+            
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 24px;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+            
+            /* Animation mượt mà khi load trang */
+            animation: floatUp 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        @keyframes floatUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Ảnh đại diện */
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.5);
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            /* Chống méo ảnh */
+            background-color: #fff; 
+        }
+
+        /* Typography (Chữ) */
+        .name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .job {
+            font-size: 1rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .bio {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: rgba(255, 255, 255, 0.9);
+            padding: 0 10px;
+        }
+
+        /* Bảng thống kê */
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 15px 0;
+        }
+
+        .stat-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-num {
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 4px;
+            letter-spacing: 1px;
+        }
+
+        /* Nút bấm (Buttons) */
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.95rem;
+            
+            /* Dùng transform để hover mượt, không gây lag */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            will-change: transform;
+        }
+
+        .btn-follow {
+            background: #ffffff;
+            color: #C850C0;
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-msg {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: 2px solid #ffffff;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        /* Responsive cho Mobile */
+        @media (max-width: 480px) {
+            .profile-card {
+                padding: 30px 15px;
+                border-radius: 20px;
+            }
+            .name {
+                font-size: 1.5rem;
+            }
+            .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Container Profile -->
+    <div class="profile-card">
+        <!-- Thay link ảnh này bằng link ảnh thật của bạn -->
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="Avatar" class="profile-img">
+        
+        <h1 class="name">Nguyễn Văn A</h1>
+        <p class="job">UI/UX Designer & Developer</p>
+        
+        <p class="bio">
+            Đam mê sáng tạo giao diện web đẹp, tối ưu hóa trải nghiệm người dùng và yêu thích sự tối giản.
+        </p>
+
+        <div class="stats">
+            <div class="stat-box">
+                <span class="stat-num">15K</span>
+                <span class="stat-label">Followers</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-num">342</span>
+                <span class="stat-label">Following</span>
+            </div>
+            <div class="stat-box">
+                <span class="stat-num">89</span>
+                <span class="stat-label">Projects</span>
+            </div>
+        </div>
+
+        <div class="buttons">
+            <button class="btn btn-follow">Follow</button>
+            <button class="btn btn-msg">Message</button>
+        </div>
+    </div>
+
+</body>
+</html>
